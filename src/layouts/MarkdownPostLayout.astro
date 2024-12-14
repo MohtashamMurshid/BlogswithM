@@ -1,10 +1,88 @@
 ---
 const { frontmatter } = Astro.props;
----
-<img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
+import ArrowLeft from "@astropub/icons/ArrowLeft";
+import TableOfContents from "../components/TableOfContents.astro";
+import type { CollectionEntry } from "astro:content";
 
-<h1>{frontmatter.title}</h1>
-<p>{frontmatter.pubDate.toString().slice(0,10)}</p>
-<p><em>{frontmatter.description}</em></p>
-<p>Written by: {frontmatter.author}</p>
-<slot />
+type MarkdownHeading = {
+  text: string;
+  level: number;
+};
+
+type Props = CollectionEntry<"blog">["data"] & { headings: MarkdownHeading[] };
+
+const { title, pubDate, description, headings } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="bg-gray-950 text-white scroll-smooth">
+    <div class="w-full">
+      <!-- Responsive Image -->
+      <img
+        src={frontmatter.image.url}
+        alt={frontmatter.image.alt}
+        class="w-full h-[200px] sm:h-[300px] lg:h-[400px] object-cover"
+      />
+
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 grid grid-cols-1 lg:grid-cols-4 gap-6"
+      >
+        <!-- Main Content -->
+        <div class="lg:col-span-3">
+          <!-- Back to Home Link -->
+          <a
+            href="/blog"
+            class="flex items-center hover:text-gray-800 transition duration-300 ease-in-out text-white"
+          >
+            <ArrowLeft class="w-6 h-6 mr-2 text-white" />
+            <span class="text-sm sm:text-base lg:text-lg text-white"
+              >Back to home</span
+            >
+          </a>
+
+          <!-- Article Title -->
+          <h1
+            class="mt-4 text-xl sm:text-2xl lg:text-3xl font-semibold leading-tight text-white"
+          >
+            {frontmatter.title}
+          </h1>
+
+          <!-- Article Metadata -->
+          <div class="mt-2 space-y-1">
+            <p class="text-gray-400 text-xs sm:text-sm lg:text-base">
+              {frontmatter.pubDate.toString().slice(0, 10)}
+            </p>
+            <p class="text-gray-400 text-sm sm:text-base lg:text-lg italic">
+              {frontmatter.description}
+            </p>
+            <p class="text-gray-500 text-sm sm:text-base lg:text-lg">
+              Written by: <span class="font-medium text-blue-500"
+                >{frontmatter.author}</span
+              >
+            </p>
+          </div>
+
+          <!-- Article Content -->
+          <div
+            class="mt-6 text-sm sm:text-base lg:text-lg leading-relaxed text-white space-y-4"
+          >
+            <slot />
+          </div>
+        </div>
+
+        <!-- Table of Contents -->
+        <aside class="hidden lg:block lg:col-span-1 sticky top-6 self-start">
+          <TableOfContents headings={headings} />
+        </aside>
+      </div>
+    </div>
+  </body>
+</html>

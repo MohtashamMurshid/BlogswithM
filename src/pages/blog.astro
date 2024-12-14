@@ -6,14 +6,49 @@ const allPosts = Object.values(
 ---
 
 <Layout>
-  <h1 class="">Hello from the blog page</h1>
-  <ul>
+  <h1 class="text-3xl font-bold text-center mt-8 mb-6">ecent Blogs</h1>
+  
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 sm:px-6 lg:px-8">
     {
       allPosts.map((post: any) => (
-        <li>
-          <a href={post.url}>{post.frontmatter.title}</a>
-        </li>
+        <div class="bg-slate-800 shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300 ease-in-out">
+          <!-- Blog Post Image -->
+          <img 
+            src={post.frontmatter.image.url} 
+            alt={post.frontmatter.image.alt} 
+            class="w-full h-48 object-cover"
+          />
+          
+          <!-- Blog Post Content -->
+          <div class="p-4">
+            <!-- Title -->
+            <h2 class="text-xl font-semibold text-gray-100 hover:text-blue-600 transition duration-300">
+              <a href={post.url}>{post.frontmatter.title}</a>
+            </h2>
+            
+            <!-- Description -->
+            <p class="text-gray-500 text-sm mt-2 line-clamp-3">
+              {post.frontmatter.description}
+            </p>
+
+            <!-- Metadata -->
+            <p class="text-gray-400 text-xs mt-4">
+              Published: {post.frontmatter.pubDate.toString().slice(0, 10)}
+            </p>
+            <p class="text-violet-400 text-xs">
+              Author: {post.frontmatter.author}
+            </p>
+
+            <!-- Read More Button -->
+            <a 
+              href={post.url} 
+              class="mt-4 inline-block text-sm text-white bg-blue-600 px-4 py-2 rounded hover:bg-blue-700 transition duration-300"
+            >
+              Read More
+            </a>
+          </div>
+        </div>
       ))
     }
-  </ul>
+  </div>
 </Layout>
