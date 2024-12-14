@@ -1,0 +1,168 @@
+/* styles/global.css */
+
+/* Base body styles for a dark theme */
+body {
+  font-family: "Inter", sans-serif; /* Use a modern font for a tech vibe */
+  line-height: 1.6;
+}
+
+/* Heading styles */
+h1 {
+  font-size: 1.5rem; /* Default size for smaller screens */
+  font-weight: bold;
+  color: #ffffff; /* White for contrast */
+  margin-bottom: 1rem;
+  padding-bottom: 0.25rem;
+}
+
+/* Responsive typography for h1 */
+@media (min-width: 1024px) {
+  /* Target screens larger than 'lg' breakpoint */
+  h1 {
+    font-size: 2rem; /* Adjust to 3xl size */
+  }
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffffff; /* White */
+  margin-bottom: 0.75rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #94a3b8; /* Light blue-gray */
+  margin-bottom: 0.5rem;
+}
+
+/* Blockquote styling for emphasis */
+blockquote {
+  border-left: 4px solid #2563eb; /* Blue accent line */
+  padding-left: 1rem;
+  margin: 1rem 0;
+  color: #cbd5e1; /* Lighter gray */
+  font-style: italic;
+  background-color: #1e293b; /* Slightly lighter background for contrast */
+}
+
+/* Code block styling */
+pre {
+  background-color: #1e293b; /* Darker background for code */
+  color: #e2e8f0; /* Light text */
+  border-radius: 8px;
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  font-family: "Fira Code", monospace; /* Tech coding font */
+}
+
+code {
+  background-color: #334155; /* Slightly lighter for inline code */
+  color: #a5b4fc; /* Soft lavender for inline code text */
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+/* List styles for better readability */
+ul,
+ol {
+  margin: 1rem 0;
+  padding-left: 2rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+/* Links */
+a {
+  color: #60a5fa; /* Light blue */
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: #3b82f6; /* Brighter blue */
+}
+
+/* Table of contents styles */
+.toc {
+  background-color: #1e293b; /* Dark gray background for the TOC */
+  border: 1px solid #334155; /* Subtle border */
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 2rem 0;
+}
+
+.toc h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.toc ul {
+  list-style: none;
+  padding: 0;
+}
+
+.toc li {
+  margin-bottom: 0.5rem;
+}
+
+.toc a {
+  color: #60a5fa; /* Light blue links for TOC */
+}
+
+.toc a:hover {
+  color: #3b82f6; /* Brighter hover effect */
+}
+
+/* Image styling */
+img {
+  max-width: 100%;
+  /* border-radius: 8px; */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+th,
+td {
+  padding: 0.75rem;
+  text-align: left;
+  border: 1px solid #334155;
+}
+
+th {
+  background-color: #1e293b;
+  color: #cbd5e1;
+}
+
+td {
+  background-color: #0f172a;
+}
+
+/* Buttons for a modern touch */
+button {
+  background-color: #2563eb; /* Blue */
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #1e40af; /* Darker blue */
+}

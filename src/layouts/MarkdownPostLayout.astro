@@ -3,6 +3,7 @@ const { frontmatter } = Astro.props;
 import ArrowLeft from "@astropub/icons/ArrowLeft";
 import TableOfContents from "../components/TableOfContents.astro";
 import type { CollectionEntry } from "astro:content";
+import "../styles/global.css";
 
 type MarkdownHeading = {
   text: string;
@@ -23,7 +24,7 @@ const { title, pubDate, description, headings } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body class="bg-gray-950 text-white scroll-smooth">
+  <body class="bg-gray-950 text-white">
     <div class="w-full">
       <!-- Responsive Image -->
       <img
@@ -50,7 +51,7 @@ const { title, pubDate, description, headings } = Astro.props;
 
           <!-- Article Title -->
           <h1
-            class="mt-4 text-xl sm:text-2xl lg:text-3xl font-semibold leading-tight text-white"
+            class="mt-4 text-xl sm:text-2xl lg:text-3xl font-semibold text-white"
           >
             {frontmatter.title}
           </h1>

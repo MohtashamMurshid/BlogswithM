@@ -6,7 +6,7 @@ const allPosts = Object.values(
 ---
 
 <Layout>
-  <h1 class="text-3xl font-bold text-center mt-8 mb-6">ecent Blogs</h1>
+  <h1 class="text-3xl font-bold text-center mt-8 mb-6 text-white">Recent Blogs</h1>
   
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 sm:px-6 lg:px-8">
     {
@@ -22,7 +22,7 @@ const allPosts = Object.values(
           <!-- Blog Post Content -->
           <div class="p-4">
             <!-- Title -->
-            <h2 class="text-xl font-semibold text-gray-100 hover:text-blue-600 transition duration-300">
+            <h2 class="text-xl font-semibold text-white hover:text-blue-600 transition duration-300">
               <a href={post.url}>{post.frontmatter.title}</a>
             </h2>
             
