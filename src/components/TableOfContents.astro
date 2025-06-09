@@ -10,20 +10,47 @@ const { headings } = Astro.props;
 const filteredHeadings = headings.filter((heading) => heading.depth <= 2);
 ---
 
-<nav class="p-4 rounded-lg shadow-md">
-  <h2 class="text-xl mb-2">Table of Contents</h2>
-  <ul class="list-none p-0">
+<nav>
+  <h3>Contents</h3>
+  <ul>
     {
       filteredHeadings.map((heading) => (
-        <li class="mb-2">
-          <a
-            href={`#${heading.slug}`}
-            class="text-blue-600 no-underline hover:underline"
-          >
-            {heading.text}
-          </a>
+        <li>
+          <a href={`#${heading.slug}`}>{heading.text}</a>
         </li>
       ))
     }
   </ul>
 </nav>
+
+<style>
+  nav {
+    margin-bottom: 2rem;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    margin-bottom: 0.25rem;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+</style>

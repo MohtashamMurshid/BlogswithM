@@ -3,52 +3,44 @@ import Layout from "../layouts/Layout.astro";
 const allPosts = Object.values(
   import.meta.glob("./posts/*.md", { eager: true })
 );
+
+// Sort posts by date (newest first)
+const sortedPosts = allPosts.sort((a: any, b: any) => {
+  const dateA = new Date(a.frontmatter.pubDate);
+  const dateB = new Date(b.frontmatter.pubDate);
+  return dateB.getTime() - dateA.getTime();
+});
 ---
 
 <Layout>
-  <h1 class="text-3xl font-bold text-center mt-8 mb-6 text-white">Recent Blogs</h1>
-  
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 sm:px-6 lg:px-8">
-    {
-      allPosts.map((post: any) => (
-        <div class="bg-slate-800 shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300 ease-in-out">
-          <!-- Blog Post Image -->
-          <img 
-            src={post.frontmatter.image.url} 
-            alt={post.frontmatter.image.alt} 
-            class="w-full h-48 object-cover"
-          />
-          
-          <!-- Blog Post Content -->
-          <div class="p-4">
-            <!-- Title -->
-            <h2 class="text-xl font-semibold text-white hover:text-blue-600 transition duration-300">
-              <a href={post.url}>{post.frontmatter.title}</a>
-            </h2>
-            
-            <!-- Description -->
-            <p class="text-gray-500 text-sm mt-2 line-clamp-3">
-              {post.frontmatter.description}
-            </p>
-
-            <!-- Metadata -->
-            <p class="text-gray-400 text-xs mt-4">
-              Published: {post.frontmatter.pubDate.toString().slice(0, 10)}
-            </p>
-            <p class="text-violet-400 text-xs">
-              Author: {post.frontmatter.author}
-            </p>
-
-            <!-- Read More Button -->
-            <a 
-              href={post.url} 
-              class="mt-4 inline-block text-sm text-white bg-blue-600 px-4 py-2 rounded hover:bg-blue-700 transition duration-300"
+  <main class="max-w-5xl mx-auto px-6 py-16">
+    <!-- Articles List -->
+    <section class="space-y-6">
+      {
+        sortedPosts.map((post: any) => (
+          <article>
+            <a
+              href={post.url}
+              class="group grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-12 items-start py-4 hover:opacity-70 transition-all duration-200 no-underline"
             >
-              Read More
+              <h2 class="md:col-span-5 text-xl md:text-lg font-semibold text-foreground group-hover:text-foreground">
+                {post.frontmatter.title}
+              </h2>
+              <p class="md:col-span-5 text-base text-muted-foreground leading-relaxed">
+                {post.frontmatter.description}
+              </p>
+              <div class="md:col-span-2 text-base text-muted-foreground md:text-right font-medium">
+                {new Date(post.frontmatter.pubDate).getFullYear()}
+              </div>
             </a>
-          </div>
-        </div>
-      ))
-    }
-  </div>
+          </article>
+        ))
+      }
+    </section>
+
+    <!-- Footer Label -->
+    <footer class="mt-24 text-center">
+      <p class="text-lg text-muted-foreground font-medium">Articles</p>
+    </footer>
+  </main>
 </Layout>

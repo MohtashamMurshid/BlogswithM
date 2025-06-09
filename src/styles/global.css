@@ -1,76 +1,176 @@
 /* styles/global.css */
 
-/* Base body styles for a dark theme */
-body {
-  font-family: "Inter", sans-serif; /* Use a modern font for a tech vibe */
-  line-height: 1.6;
+/* CSS Variables for Color Scheme */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 3.9%;
+  --primary: 0 0% 9%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 0 0% 96.1%;
+  --secondary-foreground: 0 0% 9%;
+  --accent: 0 0% 96.1%;
+  --accent-foreground: 0 0% 9%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 89.8%;
+  --input: 0 0% 89.8%;
+  --ring: 0 0% 3.9%;
+  --radius: 0.5rem;
 }
 
-/* Heading styles */
+/* Dark Mode Variables */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: 0 0% 10%;
+    --foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+  }
+}
+
+/* Force Dark Mode Class */
+.dark {
+  --background: 0 0% 10%;
+  --foreground: 0 0% 98%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 0 0% 9%;
+  --secondary: 0 0% 14.9%;
+  --secondary-foreground: 0 0% 98%;
+  --accent: 0 0% 14.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 14.9%;
+  --input: 0 0% 14.9%;
+  --ring: 0 0% 83.1%;
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.6;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  margin: 0;
+  padding: 0;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Typography */
 h1 {
-  font-size: 1.5rem; /* Default size for smaller screens */
+  font-size: 1.5rem;
   font-weight: bold;
-  color: #ffffff; /* White for contrast */
+  color: hsl(var(--foreground));
   margin-bottom: 1rem;
   padding-bottom: 0.25rem;
 }
 
-/* Responsive typography for h1 */
 @media (min-width: 1024px) {
-  /* Target screens larger than 'lg' breakpoint */
   h1 {
-    font-size: 2rem; /* Adjust to 3xl size */
+    font-size: 2rem;
   }
 }
 
 h2 {
   font-size: 2rem;
   font-weight: bold;
-  color: #ffffff; /* White */
+  color: hsl(var(--foreground));
   margin-bottom: 0.75rem;
 }
 
 h3 {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #94a3b8; /* Light blue-gray */
+  color: hsl(var(--foreground));
   margin-bottom: 0.5rem;
 }
 
-/* Blockquote styling for emphasis */
-blockquote {
-  border-left: 4px solid #2563eb; /* Blue accent line */
-  padding-left: 1rem;
-  margin: 1rem 0;
-  color: #cbd5e1; /* Lighter gray */
-  font-style: italic;
-  background-color: #1e293b; /* Slightly lighter background for contrast */
+h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  margin-bottom: 0.5rem;
 }
 
-/* Code block styling */
+/* Paragraph and Text */
+p {
+  margin-bottom: 1rem;
+  color: hsl(var(--foreground));
+}
+
+/* Blockquote */
+blockquote {
+  border-left: 4px solid hsl(var(--primary));
+  padding-left: 1rem;
+  margin: 1rem 0;
+  color: hsl(var(--foreground) / 0.8);
+  font-style: italic;
+  background-color: hsl(var(--accent));
+  padding: 1rem;
+  border-radius: var(--radius);
+}
+
+/* Code Blocks */
 pre {
-  background-color: #1e293b; /* Darker background for code */
-  color: #e2e8f0; /* Light text */
-  border-radius: 8px;
+  background-color: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+  border-radius: var(--radius);
   padding: 1rem;
   overflow-x: auto;
   margin: 1.5rem 0;
-  font-family: "Fira Code", monospace; /* Tech coding font */
+  font-family: "Fira Code", "Consolas", monospace;
+  border: 1px solid hsl(var(--border));
 }
 
 code {
-  background-color: #334155; /* Slightly lighter for inline code */
-  color: #a5b4fc; /* Soft lavender for inline code text */
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
   padding: 0.2rem 0.4rem;
-  border-radius: 4px;
-  font-family: monospace;
+  border-radius: calc(var(--radius) * 0.5);
+  font-family: "Fira Code", "Consolas", monospace;
+  font-size: 0.875rem;
 }
 
-/* List styles for better readability */
+pre code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+/* Lists */
 ul,
 ol {
   margin: 1rem 0;
   padding-left: 2rem;
+  color: hsl(var(--foreground));
 }
 
 li {
@@ -79,20 +179,21 @@ li {
 
 /* Links */
 a {
-  color: #60a5fa; /* Light blue */
+  color: hsl(var(--primary));
   text-decoration: none;
-  transition: color 0.2s;
+  transition: color 0.2s ease;
 }
 
 a:hover {
-  color: #3b82f6; /* Brighter blue */
+  color: hsl(var(--primary) / 0.8);
+  text-decoration: none;
 }
 
-/* Table of contents styles */
+/* Table of Contents */
 .toc {
-  background-color: #1e293b; /* Dark gray background for the TOC */
-  border: 1px solid #334155; /* Subtle border */
-  border-radius: 8px;
+  background-color: hsl(var(--accent));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
   padding: 1rem;
   margin: 2rem 0;
 }
@@ -100,7 +201,7 @@ a:hover {
 .toc h2 {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #ffffff;
+  color: hsl(var(--accent-foreground));
   margin-bottom: 1rem;
 }
 
@@ -114,55 +215,131 @@ a:hover {
 }
 
 .toc a {
-  color: #60a5fa; /* Light blue links for TOC */
+  color: hsl(var(--primary));
 }
 
 .toc a:hover {
-  color: #3b82f6; /* Brighter hover effect */
+  color: hsl(var(--primary) / 0.8);
 }
 
-/* Image styling */
+/* Images */
 img {
   max-width: 100%;
-  /* border-radius: 8px; */
+  height: auto;
+  border-radius: var(--radius);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Table styling */
+/* Tables */
 table {
   width: 100%;
   border-collapse: collapse;
   margin: 1.5rem 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid hsl(var(--border));
 }
 
 th,
 td {
   padding: 0.75rem;
   text-align: left;
-  border: 1px solid #334155;
+  border-bottom: 1px solid hsl(var(--border));
 }
 
 th {
-  background-color: #1e293b;
-  color: #cbd5e1;
+  background-color: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+  font-weight: 600;
 }
 
 td {
-  background-color: #0f172a;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
 }
 
-/* Buttons for a modern touch */
+tr:last-child td {
+  border-bottom: none;
+}
+
+/* Buttons */
 button {
-  background-color: #2563eb; /* Blue */
-  color: #ffffff;
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
+  font-weight: 500;
   border: none;
-  border-radius: 8px;
+  border-radius: var(--radius);
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s ease;
+  font-family: inherit;
 }
 
 button:hover {
-  background-color: #1e40af; /* Darker blue */
+  background-color: hsl(var(--primary) / 0.9);
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Secondary Button */
+.button-secondary {
+  background-color: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+}
+
+.button-secondary:hover {
+  background-color: hsl(var(--secondary) / 0.8);
+}
+
+/* Destructive Button */
+.button-destructive {
+  background-color: hsl(var(--destructive));
+  color: hsl(var(--destructive-foreground));
+}
+
+.button-destructive:hover {
+  background-color: hsl(var(--destructive) / 0.9);
+}
+
+/* Form Elements */
+input,
+textarea,
+select {
+  background-color: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  padding: 0.5rem 0.75rem;
+  color: hsl(var(--foreground));
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: hsl(var(--ring));
+  box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2);
+}
+
+/* Utility Classes */
+.text-muted {
+  color: hsl(var(--foreground) / 0.6);
+}
+
+.border-radius {
+  border-radius: var(--radius);
+}
+
+.shadow {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }

@@ -1,11 +1,106 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
-
 ---
 
 <Layout>
-<h1>
-    Hello from the contact page
-</h1>
+  <main class="min-h-screen max-w-3xl mx-auto px-6 py-12">
+    <!-- Header -->
+    <header class="mb-12">
+      <h1 class="text-xl font-light">Contact</h1>
+      Get in Touch
+    </header>
+    <p class="text-lg text-muted leading-relaxed max-w-2xl">
+      I'm always interested in hearing about new opportunities, collaborations,
+      and interesting projects. Feel free to reach out!
+    </p>
+  </main>
+
+  <!-- Contact Information -->
+  <section class="space-y-12">
+    <div class="grid md:grid-cols-2 gap-12">
+      <!-- Contact Details -->
+      <div class="space-y-8">
+        <h2 class="text-2xl font-medium">Let's Connect</h2>
+
+        <div class="space-y-6">
+          <div class="space-y-2">
+            <h3 class="text-sm font-medium text-muted uppercase tracking-wide">
+              Email
+            </h3>
+            <a
+              href="mailto:mohtasahmmurshid@gmail.com"
+              class="text-lg hover:text-primary transition-colors duration-200"
+            >
+              mohtasahmmurshid@gmail.com
+            </a>
+          </div>
+
+          <div class="space-y-2">
+            <h3 class="text-sm font-medium text-muted uppercase tracking-wide">
+              LinkedIn
+            </h3>
+            <a
+              href="https://www.linkedin.com/in/MohtashamMurshid/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-lg hover:text-primary transition-colors duration-200"
+            >
+              linkedin.com/in/MohtashamMurshid
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Contact Form -->
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="mt-20 pt-12 border-t border-border text-center">
+    <h3 class="text-xl font-medium mb-4">Prefer social media?</h3>
+    <p class="text-muted mb-6">
+      Connect with me on LinkedIn or check out my latest articles.
+    </p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a
+        href="https://www.linkedin.com/in/MohtashamMurshid/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 px-6 py-3 border border-border rounded-lg font-medium hover:bg-accent hover:text-accent-foreground transition-colors duration-200"
+      >
+        LinkedIn Profile
+        <svg
+          class="w-4 h-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+          ></path>
+        </svg>
+      </a>
+      <a
+        href="/blog"
+        class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity duration-200"
+      >
+        Read Articles
+        <svg
+          class="w-4 h-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+        </svg>
+      </a>
+    </div>
+  </section>
 </Layout>

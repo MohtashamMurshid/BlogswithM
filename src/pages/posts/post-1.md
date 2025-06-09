@@ -18,8 +18,6 @@ From my earliest days tinkering with code to building projects that make an impa
 
 In addition to programming, I enjoy collaborating with others, sharing knowledge, and giving back to the community. I’ve realized that the best way to grow is by helping others grow too.
 
----
-
 # Why Start a Blog?
 
 There’s something magical about writing. It allows you to express your ideas, share your experiences, and create a bridge for others to learn from your journey.
@@ -31,8 +29,6 @@ Starting this blog is my way of doing just that. Here’s what you can expect:
 - **Community Engagement**: A platform to connect, collaborate, and exchange ideas with like-minded people.
 
 I believe in the power of technology to solve real-world problems, and this blog will showcase the intersection of my technical expertise and creativity.
-
----
 
 # The Vision
 
@@ -49,4 +45,6 @@ Whether you’re here to learn something new, get inspired, or just enjoy some i
 Thank you for being part of this journey. Stay tuned for upcoming posts! 🚀  
 If you’d like to connect, feel free to reach out on [LinkedIn](https://www.linkedin.com/in/MohtashamMurshid/) or shoot me an email at **mohtasahmmurshid@gmail.com**.
 
----
+```javascript
+console.log("Byeee");
+```
