@@ -86,7 +86,7 @@ body {
 
 /* Typography */
 h1 {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: bold;
   color: hsl(var(--foreground));
   margin-bottom: 1rem;
@@ -100,14 +100,14 @@ h1 {
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 0.5rem;
   font-weight: bold;
   color: hsl(var(--foreground));
   margin-bottom: 0.75rem;
 }
 
 h3 {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: bold;
   color: hsl(var(--foreground));
   margin-bottom: 0.5rem;
@@ -122,7 +122,7 @@ h4 {
 
 /* Paragraph and Text */
 p {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   color: hsl(var(--foreground));
 }
 

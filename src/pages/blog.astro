@@ -13,25 +13,22 @@ const sortedPosts = allPosts.sort((a: any, b: any) => {
 ---
 
 <Layout>
-  <main class="max-w-5xl mx-auto px-6 py-16">
+  <main class="max-w-4xl mx-auto px-6 py-16">
     <!-- Articles List -->
-    <section class="space-y-6">
+    <section class="space-y-1">
       {
         sortedPosts.map((post: any) => (
-          <article>
+          <article class="group">
             <a
               href={post.url}
-              class="group grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-12 items-start py-4 hover:opacity-70 transition-all duration-200 no-underline"
+              class="flex items-center justify-between py-2 px-4 rounded-lg hover:bg-muted/20 transition-all duration-200 no-underline"
             >
-              <h2 class="md:col-span-5 text-xl md:text-lg font-semibold text-foreground group-hover:text-foreground">
+              <h2 class="text-lg font-semibold text-foreground group-hover:text-foreground transition-colors">
                 {post.frontmatter.title}
               </h2>
-              <p class="md:col-span-5 text-base text-muted-foreground leading-relaxed">
-                {post.frontmatter.description}
-              </p>
-              <div class="md:col-span-2 text-base text-muted-foreground md:text-right font-medium">
+              <span class="text-sm text-muted-foreground font-medium">
                 {new Date(post.frontmatter.pubDate).getFullYear()}
-              </div>
+              </span>
             </a>
           </article>
         ))
