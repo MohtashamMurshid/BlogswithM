@@ -10,13 +10,15 @@ const { headings } = Astro.props;
 const filteredHeadings = headings.filter((heading) => heading.depth <= 2);
 ---
 
-<nav>
-  <h3>Contents</h3>
-  <ul>
+<nav class="toc">
+  <h3 class="toc-title">Contents</h3>
+  <ul class="toc-list">
     {
       filteredHeadings.map((heading) => (
-        <li>
-          <a href={`#${heading.slug}`}>{heading.text}</a>
+        <li class={`toc-item level-${heading.depth}`}>
+          <a href={`#${heading.slug}`} class="toc-link">
+            {heading.text}
+          </a>
         </li>
       ))
     }
@@ -24,33 +26,58 @@ const filteredHeadings = headings.filter((heading) => heading.depth <= 2);
 </nav>
 
 <style>
-  nav {
-    margin-bottom: 2rem;
+  .toc {
+    margin: 16pt 0 20pt 0;
+    padding: 8pt;
+    border: 1pt solid #ccc;
+    background: #f9f9f9;
+    break-inside: avoid;
   }
 
-  h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
+  .toc-title {
+    font-size: 12pt;
+    font-weight: bold;
+    margin: 0 0 6pt 0;
+    color: black;
+    text-align: center;
+    font-family: "Times New Roman", Times, serif;
   }
 
-  ul {
+  .toc-list {
     list-style: none;
     padding: 0;
     margin: 0;
+    font-family: "Times New Roman", Times, serif;
   }
 
-  li {
-    margin-bottom: 0.25rem;
+  .toc-item {
+    margin-bottom: 3pt;
+    line-height: 1.2;
   }
 
-  a {
-    color: inherit;
+  .toc-item.level-1 {
+    margin-left: 0;
+    font-weight: bold;
+  }
+
+  .toc-item.level-2 {
+    margin-left: 12pt;
+    font-weight: normal;
+  }
+
+  .toc-link {
+    color: black;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 11pt;
+    display: block;
   }
 
-  a:hover {
+  .toc-link:hover {
     text-decoration: underline;
+  }
+
+  /* Ensure visibility in IEEE paper context */
+  .toc * {
+    color: black !important;
   }
 </style>

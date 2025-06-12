@@ -3,7 +3,6 @@ const { frontmatter } = Astro.props;
 import ArrowLeft from "@astropub/icons/ArrowLeft";
 import type { CollectionEntry } from "astro:content";
 import TableOfContents from "../components/TableOfContents.astro";
-import "../styles/global.css";
 
 type MarkdownHeading = {
   text: string;
@@ -16,206 +15,516 @@ const { title, pubDate, description, headings } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Times+New+Roman&display=swap"
+      rel="stylesheet"
+    />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
   <body>
-    <main>
-      <nav>
+    <div class="ieee-paper">
+      <nav class="back-nav">
         <a href="/blog">
           <ArrowLeft class="icon" />
           Back to articles
         </a>
       </nav>
 
-      <header>
-        <h1>{frontmatter.title}</h1>
-        <div class="meta">
-          <time datetime={frontmatter.pubDate.toString()}>
-            {
-              new Date(frontmatter.pubDate).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })
-            }
-          </time>
-          <span>By {frontmatter.author}</span>
+      <!-- IEEE Paper Header -->
+      <header class="paper-header">
+        <h1 class="paper-title">{frontmatter.title}</h1>
+
+        <div class="authors">
+          <div class="author-info">
+            <span class="author-name">{frontmatter.author}</span>
+            <div class="author-affiliation">
+              Department of Computer Science<br />
+              University Name<br />
+              Email: author@university.edu
+            </div>
+          </div>
         </div>
+
         {
           frontmatter.description && (
-            <p class="description">{frontmatter.description}</p>
+            <div class="abstract-section">
+              <h2 class="section-title">Abstract</h2>
+              <p class="abstract-text">{frontmatter.description}</p>
+              <p class="keywords">
+                <strong>Keywords—</strong>machine learning, artificial
+                intelligence, computer science
+              </p>
+            </div>
           )
         }
       </header>
 
-      {
-        frontmatter.image && (
-          <div class="featured-image">
-            <img src={frontmatter.image.url} alt={frontmatter.image.alt} />
-          </div>
-        )
-      }
-
       {headings.length > 0 && <TableOfContents headings={headings} />}
 
-      <article>
-        <slot />
-      </article>
-    </main>
+      <!-- Two-column content area -->
+      <div class="paper-content">
+        <article class="ieee-article">
+          <slot />
+        </article>
+      </div>
+
+      <!-- Footer with conference info -->
+      <footer class="paper-footer">
+        <p>© 2024 IEEE. Personal use of this material is permitted.</p>
+      </footer>
+    </div>
 
     <style>
-      body {
-        max-width: 48rem;
-        margin: 0 auto;
-        padding: 2rem 1rem;
-        line-height: 1.6;
-      }
-
-      nav {
-        margin-bottom: 2rem;
-      }
-
-      nav a {
-        display: inline-flex;
-        align-items: center;
-        text-decoration: none;
-        font-size: 0.9rem;
-      }
-
-      nav a:hover {
-        opacity: 0.7;
-      }
-
-      .icon {
-        width: 1rem;
-        height: 1rem;
-        margin-right: 0.5rem;
-      }
-
-      header {
-        margin-bottom: 3rem;
-      }
-
-      h1 {
-        font-size: 1.8rem;
-        font-weight: 100;
-        margin: 0 0 1rem 0;
-        line-height: 1.2;
-      }
-
-      h2 {
-        font-size: 0.4rem;
-        font-weight: 100;
-        margin: 0 0 1rem 0;
-        line-height: 1.2;
-      }
-      p {
-        font-size: 0.8rem;
-        font-weight: 100;
-        margin: 0 0 1rem 0;
-        line-height: 1.2;
-      }
-
-      .meta {
-        display: flex;
-        gap: 1rem;
-        font-size: 0.9rem;
-        opacity: 0.7;
-        margin-bottom: 1rem;
-      }
-
-      .description {
-        font-size: 1.1rem;
-        opacity: 0.8;
-        margin: 1rem 0 0 0;
-      }
-
-      article {
-        margin-bottom: 3rem;
-      }
-
-      .featured-image {
-        margin-bottom: 2rem;
-      }
-
-      .featured-image img {
-        width: 100%;
-        height: 300px;
-        object-fit: cover;
-        border-radius: 4px;
-      }
-
-      /* Minimal prose styling */
-      :global(article h2) {
-        font-size: 1.4rem;
-        font-weight: 400;
-        margin: 2rem 0 1rem 0;
-      }
-
-      :global(article h3) {
-        font-size: 1.2rem;
-        font-weight: 500;
-        margin: 1.5rem 0 0.5rem 0;
-      }
-
-      :global(article p) {
-        margin-bottom: 1rem;
-      }
-
-      :global(article a) {
-        text-decoration: underline;
-      }
-
-      :global(article ul, article ol) {
-        margin: 1rem 0;
-        padding-left: 1.5rem;
-      }
-
-      :global(article blockquote) {
-        border-left: 3px solid;
-        padding-left: 1rem;
-        margin: 1.5rem 0;
-        opacity: 0.8;
-      }
-
-      :global(article pre) {
-        background: rgba(0, 0, 0, 0.1);
-        padding: 1rem;
-        border-radius: 4px;
-        overflow-x: auto;
-        margin: 1.5rem 0;
-      }
-
-      :global(article code) {
-        background: rgba(0, 0, 0, 0.1);
-        padding: 0.2rem 0.4rem;
-        border-radius: 3px;
-        font-size: 0.9rem;
-      }
-
-      :global(article pre code) {
-        background: transparent;
+      /* Complete reset and isolation for IEEE paper layout */
+      * {
+        box-sizing: border-box;
+        margin: 0;
         padding: 0;
       }
 
+      html {
+        background: white;
+        color: black;
+      }
+
+      body {
+        font-family: "Times New Roman", Times, serif !important;
+        font-size: 12pt !important;
+        line-height: 1.2 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: white !important;
+        color: black !important;
+        /* Override any inherited dark mode styles */
+        --background: 0 0% 100% !important;
+        --foreground: 0 0% 0% !important;
+      }
+
+      .ieee-paper {
+        max-width: 8.5in;
+        margin: 0 auto;
+        padding: 0.75in;
+        background: white !important;
+        color: black !important;
+        min-height: 11in;
+        counter-reset: section;
+        /* Completely override any inherited styles */
+        font-family: "Times New Roman", Times, serif !important;
+      }
+
+      .back-nav {
+        margin-bottom: 1rem;
+        font-size: 9pt;
+      }
+
+      .back-nav a {
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
+        color: black !important;
+        font-family: "Times New Roman", Times, serif !important;
+      }
+
+      .back-nav a:hover {
+        text-decoration: underline;
+      }
+
+      .icon {
+        width: 0.8rem;
+        height: 0.8rem;
+        margin-right: 0.3rem;
+        color: black !important;
+      }
+
+      .paper-header {
+        text-align: center;
+        margin-bottom: 20pt;
+        border-bottom: none;
+      }
+
+      .paper-title {
+        font-size: 22pt !important;
+        font-weight: bold !important;
+        margin: 0 0 12pt 0 !important;
+        line-height: 1.1 !important;
+        text-transform: none !important;
+        color: black !important;
+        font-family: "Times New Roman", Times, serif !important;
+      }
+
+      .authors {
+        margin-bottom: 16pt;
+      }
+
+      .author-info {
+        margin-bottom: 8pt;
+      }
+
+      .author-name {
+        font-size: 13pt !important;
+        font-weight: bold !important;
+        color: black !important;
+        font-family: "Times New Roman", Times, serif !important;
+      }
+
+      .author-affiliation {
+        font-size: 11pt !important;
+        font-style: italic !important;
+        margin-top: 4pt !important;
+        line-height: 1.2 !important;
+        color: black !important;
+        font-family: "Times New Roman", Times, serif !important;
+      }
+
+      .abstract-section {
+        text-align: left;
+        max-width: 100%;
+        margin: 16pt 0;
+        padding: 0;
+      }
+
+      .section-title {
+        font-size: 12pt !important;
+        font-weight: bold !important;
+        margin: 0 0 6pt 0 !important;
+        text-align: left !important;
+        color: black !important;
+        font-family: "Times New Roman", Times, serif !important;
+      }
+
+      .abstract-text {
+        font-size: 11pt !important;
+        text-align: justify !important;
+        margin: 0 0 8pt 0 !important;
+        line-height: 1.3 !important;
+        color: black !important;
+        font-family: "Times New Roman", Times, serif !important;
+      }
+
+      .keywords {
+        font-size: 11pt !important;
+        font-style: italic !important;
+        margin: 0 !important;
+        color: black !important;
+        font-family: "Times New Roman", Times, serif !important;
+      }
+
+      .paper-content {
+        columns: 1;
+        text-align: justify;
+        hyphens: auto;
+        color: black !important;
+      }
+
+      .ieee-article {
+        break-inside: avoid-column;
+      }
+
+      /* IEEE Typography Styles - Override ALL inherited styles */
+      :global(.ieee-article h1) {
+        font-size: 16pt !important;
+        font-weight: bold !important;
+        margin: 12pt 0 6pt 0 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5pt !important;
+        break-after: avoid !important;
+        color: black !important;
+        font-family: "Times New Roman", Times, serif !important;
+        line-height: 1.2 !important;
+        padding: 0 !important;
+        border: none !important;
+        background: none !important;
+      }
+
+      :global(.ieee-article h2) {
+        font-size: 14pt !important;
+        font-weight: bold !important;
+        margin: 10pt 0 4pt 0 !important;
+        break-after: avoid !important;
+        color: black !important;
+        font-family: "Times New Roman", Times, serif !important;
+        line-height: 1.2 !important;
+        padding: 0 !important;
+        border: none !important;
+        background: none !important;
+      }
+
+      :global(.ieee-article h3) {
+        font-size: 13pt !important;
+        font-weight: bold !important;
+        margin: 8pt 0 3pt 0 !important;
+        font-style: italic !important;
+        break-after: avoid !important;
+        color: black !important;
+        font-family: "Times New Roman", Times, serif !important;
+        line-height: 1.2 !important;
+        padding: 0 !important;
+        border: none !important;
+        background: none !important;
+      }
+
+      :global(.ieee-article h4) {
+        font-size: 12pt !important;
+        font-weight: bold !important;
+        margin: 6pt 0 3pt 0 !important;
+        break-after: avoid !important;
+        color: black !important;
+        font-family: "Times New Roman", Times, serif !important;
+        line-height: 1.2 !important;
+        padding: 0 !important;
+        border: none !important;
+        background: none !important;
+      }
+
+      :global(.ieee-article h5) {
+        font-size: 12pt !important;
+        font-weight: normal !important;
+        font-style: italic !important;
+        margin: 6pt 0 3pt 0 !important;
+        break-after: avoid !important;
+        color: black !important;
+        font-family: "Times New Roman", Times, serif !important;
+        line-height: 1.2 !important;
+        padding: 0 !important;
+        border: none !important;
+        background: none !important;
+      }
+
+      :global(.ieee-article h6) {
+        font-size: 12pt !important;
+        font-weight: normal !important;
+        margin: 6pt 0 3pt 0 !important;
+        break-after: avoid !important;
+        color: black !important;
+        font-family: "Times New Roman", Times, serif !important;
+        line-height: 1.2 !important;
+        padding: 0 !important;
+        border: none !important;
+        background: none !important;
+      }
+
+      :global(.ieee-article p) {
+        margin: 0 0 6pt 0 !important;
+        text-indent: 12pt !important;
+        line-height: 1.2 !important;
+        color: black !important;
+        font-family: "Times New Roman", Times, serif !important;
+        font-size: 12pt !important;
+        background: none !important;
+        border: none !important;
+        padding: 0 !important;
+      }
+
+      :global(.ieee-article p:first-child),
+      :global(.ieee-article h1 + p),
+      :global(.ieee-article h2 + p),
+      :global(.ieee-article h3 + p),
+      :global(.ieee-article h4 + p),
+      :global(.ieee-article h5 + p),
+      :global(.ieee-article h6 + p) {
+        text-indent: 0 !important;
+      }
+
+      :global(.ieee-article ul, .ieee-article ol) {
+        margin: 6pt 0 !important;
+        padding-left: 20pt !important;
+        line-height: 1.2 !important;
+        color: black !important;
+        font-size: 12pt !important;
+        font-family: "Times New Roman", Times, serif !important;
+        background: none !important;
+        border: none !important;
+      }
+
+      :global(.ieee-article li) {
+        margin-bottom: 3pt !important;
+        color: black !important;
+        font-family: "Times New Roman", Times, serif !important;
+        background: none !important;
+        border: none !important;
+        padding: 0 !important;
+      }
+
+      :global(.ieee-article blockquote) {
+        margin: 8pt 0 !important;
+        padding: 0 12pt !important;
+        border-left: none !important;
+        font-style: italic !important;
+        font-size: 11pt !important;
+        color: black !important;
+        font-family: "Times New Roman", Times, serif !important;
+        background: none !important;
+        border-radius: 0 !important;
+      }
+
+      :global(.ieee-article pre) {
+        background: #f5f5f5 !important;
+        border: 1pt solid #ccc !important;
+        padding: 6pt !important;
+        margin: 8pt 0 !important;
+        font-size: 10pt !important;
+        line-height: 1.1 !important;
+        overflow-x: auto !important;
+        break-inside: avoid !important;
+        color: black !important;
+        font-family: "Courier New", monospace !important;
+        border-radius: 0 !important;
+      }
+
+      :global(.ieee-article code) {
+        font-family: "Courier New", monospace !important;
+        font-size: 11pt !important;
+        background: #f0f0f0 !important;
+        padding: 1pt 2pt !important;
+        color: black !important;
+        border-radius: 0 !important;
+        border: none !important;
+      }
+
+      :global(.ieee-article pre code) {
+        background: transparent !important;
+        padding: 0 !important;
+      }
+
+      :global(.ieee-article a) {
+        color: black !important;
+        text-decoration: none !important;
+        font-family: "Times New Roman", Times, serif !important;
+      }
+
+      :global(.ieee-article a:hover) {
+        text-decoration: underline !important;
+      }
+
+      :global(.ieee-article strong) {
+        font-weight: bold !important;
+        color: black !important;
+        font-family: "Times New Roman", Times, serif !important;
+      }
+
+      :global(.ieee-article em) {
+        font-style: italic !important;
+        color: black !important;
+        font-family: "Times New Roman", Times, serif !important;
+      }
+
+      /* Figures and Tables */
+      :global(.ieee-article figure) {
+        margin: 8pt 0 !important;
+        text-align: center !important;
+        break-inside: avoid !important;
+        background: none !important;
+        border: none !important;
+        padding: 0 !important;
+      }
+
+      :global(.ieee-article figcaption) {
+        font-size: 10pt !important;
+        margin-top: 4pt !important;
+        text-align: center !important;
+        font-weight: bold !important;
+        color: black !important;
+        font-family: "Times New Roman", Times, serif !important;
+        background: none !important;
+        border: none !important;
+        padding: 0 !important;
+      }
+
+      :global(.ieee-article table) {
+        width: 100% !important;
+        border-collapse: collapse !important;
+        margin: 8pt 0 !important;
+        font-size: 10pt !important;
+        break-inside: avoid !important;
+        color: black !important;
+        font-family: "Times New Roman", Times, serif !important;
+        background: white !important;
+      }
+
+      :global(.ieee-article th, .ieee-article td) {
+        border: 1pt solid black !important;
+        padding: 2pt 4pt !important;
+        text-align: left !important;
+        color: black !important;
+        font-family: "Times New Roman", Times, serif !important;
+        background: none !important;
+      }
+
+      :global(.ieee-article th) {
+        background: #f0f0f0 !important;
+        font-weight: bold !important;
+      }
+
+      :global(.ieee-article img) {
+        max-width: 100% !important;
+        height: auto !important;
+        display: block !important;
+        margin: 0 auto !important;
+        background: none !important;
+        border: none !important;
+        padding: 0 !important;
+      }
+
+      :global(.ieee-article hr) {
+        border: none !important;
+        border-top: 1pt solid #ccc !important;
+        margin: 12pt 0 !important;
+        background: none !important;
+        padding: 0 !important;
+      }
+
+      .paper-footer {
+        margin-top: 20pt;
+        padding-top: 10pt;
+        border-top: 1pt solid #ccc;
+        font-size: 8pt;
+        text-align: center;
+        color: #666 !important;
+        break-before: avoid;
+        font-family: "Times New Roman", Times, serif !important;
+      }
+
+      /* Print styles */
+      @media print {
+        .ieee-paper {
+          max-width: none;
+          margin: 0;
+          padding: 0.75in;
+        }
+
+        .back-nav {
+          display: none;
+        }
+      }
+
+      /* Mobile responsive adjustments */
       @media (max-width: 768px) {
-        body {
-          padding: 1rem;
+        .ieee-paper {
+          padding: 0.5in;
         }
 
-        h1 {
-          font-size: 0.2rem;
+        .paper-title {
+          font-size: 18pt !important;
         }
 
-        .meta {
-          flex-direction: column;
-          gap: 0.5rem;
+        :global(.ieee-article h1) {
+          font-size: 14pt !important;
+        }
+
+        :global(.ieee-article h2) {
+          font-size: 13pt !important;
+        }
+
+        :global(.ieee-article h3) {
+          font-size: 12pt !important;
         }
       }
     </style>
