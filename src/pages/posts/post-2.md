@@ -7,6 +7,9 @@ description: "AI is the broader field that encompasses the creation of machines 
 
 pubDate: "2022-07-08"
 tags: ["astro", "blogging", "learning in public", "successes"]
+department: Department of computer science
+university: taylors university
+email: contact@mohtasham.dev
 ---
 
 # **1. What is Artificial Intelligence (AI)?**

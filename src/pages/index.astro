@@ -1,14 +1,80 @@
 ---
 import Layout from "../layouts/Layout.astro";
+const allPosts = Object.values(
+  import.meta.glob("./posts/*.md", { eager: true })
+);
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
-
-return Astro.redirect("https://mohtasham.vercel.app");
+// Sort posts by date (newest first)
+const sortedPosts = allPosts.sort((a: any, b: any) => {
+  const dateA = new Date(a.frontmatter.pubDate);
+  const dateB = new Date(b.frontmatter.pubDate);
+  return dateB.getTime() - dateA.getTime();
+});
 ---
 
-<Layout>
-  <main>
-    <h1>Hello World</h1>
+<Layout
+  title="BlogsWithM — Articles"
+  description="Writing on software, notes, and experiments."
+>
+  <main class="max-w-3xl mx-auto px-6 py-14">
+    <header class="mb-10">
+      <h1 class="text-2xl font-semibold tracking-tight">BlogsWithM</h1>
+      <p class="mt-2 text-sm text-muted-foreground">
+        Minimal notes on the web. Clean, focused, fast.
+      </p>
+      <nav class="mt-4 flex items-center gap-4 text-sm">
+        <a
+          class="no-underline hover:underline"
+          href="https://github.com/MohtashamMurshid"
+          target="_blank"
+          rel="noopener noreferrer">Github</a
+        >
+        <span class="text-muted-foreground">·</span>
+        <a
+          class="no-underline hover:underline"
+          href="https://x.com/mohtashamdotdev"
+          target="_blank"
+          rel="noopener noreferrer">Twitter</a
+        >
+        <span class="text-muted-foreground">·</span>
+        <a
+          class="no-underline hover:underline"
+          href="https://www.linkedin.com/in/mohtashammurshid"
+          target="_blank"
+          rel="noopener noreferrer">LinkedIn</a
+        >
+        <span class="text-muted-foreground">·</span>
+        <a
+          class="no-underline hover:underline"
+          href="mailto:contact@mohtasham.dev">Email</a
+        >
+      </nav>
+    </header>
+
+    <section
+      aria-label="Articles"
+      class="divide-y divide-muted/30 rounded-lg border border-muted/30"
+    >
+      {
+        sortedPosts.map((post: any) => (
+          <article class="group">
+            <a
+              href={post.url}
+              class="flex items-center justify-between py-3 px-4 hover:bg-muted/10 transition-colors no-underline"
+            >
+              <h2 class="text-base font-medium text-foreground group-hover:translate-x-0.5 transition-transform">
+                {post.frontmatter.title}
+              </h2>
+              <span class="text-xs text-muted-foreground">
+                {new Date(post.frontmatter.pubDate).toLocaleDateString(
+                  undefined,
+                  { year: "numeric", month: "short" }
+                )}
+              </span>
+            </a>
+          </article>
+        ))
+      }
+    </section>
   </main>
 </Layout>

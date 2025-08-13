@@ -1,10 +1,24 @@
 ---
-import NavBar from "../components/NavBar.astro";
 import "../styles/global.css";
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  lang?: string;
+  showHeader?: boolean;
+}
+
+const {
+  title = "BlogsWithM",
+  description = "Articles, notes, and thoughts.",
+  image = "/favicon.svg",
+  lang = "en",
+  showHeader = false,
+} = Astro.props as Props;
 ---
 
 <!doctype html>
-<html lang="en" class="dark">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -16,10 +30,35 @@ import "../styles/global.css";
       rel="stylesheet"
     />
     <meta name="generator" content={Astro.generator} />
-    <title>BlogsWithM</title>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={image} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    <slot name="head" />
   </head>
-  <body>
-    <NavBar />
-    <slot />
+  <body class="min-h-screen flex flex-col">
+    {
+      showHeader && (
+        <header class="max-w-3xl mx-auto px-6 py-6">
+          <a href="/" class="text-xl font-semibold no-underline">
+            BlogsWithM
+          </a>
+        </header>
+      )
+    }
+    <main class="flex-1">
+      <slot />
+    </main>
+    <footer
+      class="max-w-3xl mx-auto px-6 py-12 text-sm text-muted-foreground text-center"
+    >
+      <p>© {new Date().getFullYear()} BlogsWithM</p>
+    </footer>
   </body>
 </html>

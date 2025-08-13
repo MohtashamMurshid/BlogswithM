@@ -9,17 +9,11 @@ image:
   alt: "The Astro logo on a dark background with a purple gradient arc."
 pubDate: "2024-07-08"
 tags: ["astro", "blogging", "learning in public", "successes"]
+department: Department of Computer Science and Engineering
+university: Islamic University of Science and Technology, Awantipora, Pulwama, J&K
 ---
 
 # Brain-Computer Interfaces: An In-Depth Seminar Report
-
-Muizza Muayqeeb Akram  
-Department of Computer Science and Engineering  
-Islamic University of Science and Technology, Awantipora, Pulwama, J&K
-
-Submitted to  
-Dr. Zubair Ahmad Shah  
-Assistant Professor
 
 Autumn – 2024
 
