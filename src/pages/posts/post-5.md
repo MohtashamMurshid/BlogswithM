@@ -1,12 +1,20 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
 
-title: Big Data Technologies for Precision Agriculture: Implementation and Evaluation of a Dual-Award Assignment Platform
+title: "Big Data Technologies for Precision Agriculture: Implementation and Evaluation of a Dual-Award Assignment Platform"
 author: Mohtasham Murshid Madani
 description: "This report explores the design, implementation, and evaluation of a precision agriculture platform utilizing open-source big data technologies. The platform integrates heterogeneous sensor data, satellite imagery, and environmental feeds, leveraging tools such as Apache Kafka, Flink, Spark, and TensorFlow Serving to deliver real-time analytics and machine learning-driven crop recommendations. The study demonstrates significant improvements in water-use efficiency, processing latency, and crop classification accuracy, providing a scalable and fault-tolerant solution for modern agricultural decision-making."
 
 pubDate: "2025-08-14"
-tags: ["big data", "precision agriculture", "apache kafka", "machine learning", "data pipeline", "real-time analytics"]
+tags:
+  [
+    "big data",
+    "precision agriculture",
+    "apache kafka",
+    "machine learning",
+    "data pipeline",
+    "real-time analytics",
+  ]
 department: School of Computer Science
 university: Taylor’s University Lakeside Campus
 email: contact@mohtasham.dev

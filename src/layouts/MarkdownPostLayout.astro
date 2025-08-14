@@ -1,17 +1,24 @@
 ---
-const { frontmatter } = Astro.props;
 import ArrowLeft from "@astropub/icons/ArrowLeft";
-import type { CollectionEntry } from "astro:content";
 import TableOfContents from "../components/TableOfContents.astro";
+import type { MarkdownHeading } from "astro";
 
-type MarkdownHeading = {
-  text: string;
-  level: number;
+type Frontmatter = {
+  title?: string;
+  author?: string;
+  department?: string;
+  university?: string;
+  email?: string;
+  description?: string;
+  pubDate?: string | Date;
 };
 
-type Props = CollectionEntry<"blog">["data"] & { headings: MarkdownHeading[] };
+type Props = {
+  frontmatter: Frontmatter;
+  headings: MarkdownHeading[];
+};
 
-const { title, pubDate, description, headings } = Astro.props;
+const { frontmatter, headings } = Astro.props as Props;
 ---
 
 <!doctype html>
@@ -27,7 +34,7 @@ const { title, pubDate, description, headings } = Astro.props;
       rel="stylesheet"
     />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <title>{frontmatter.title}</title>
   </head>
   <body>
     <div class="ieee-paper">
