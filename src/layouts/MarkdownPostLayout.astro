@@ -19,6 +19,13 @@ type Props = {
 };
 
 const { frontmatter, headings } = Astro.props as Props;
+const pageUrl = Astro.url.href;
+const siteUrl = Astro.site?.href ?? "https://blog.mohtasham.dev/";
+const ogImage = new URL("/favicon.svg", Astro.site).href;
+const brandName = "Mohtasham Murshid Madani";
+const pageTitle = frontmatter.title
+  ? `${frontmatter.title} | ${brandName}`
+  : brandName;
 ---
 
 <!doctype html>
@@ -34,7 +41,44 @@ const { frontmatter, headings } = Astro.props as Props;
       rel="stylesheet"
     />
     <meta name="generator" content={Astro.generator} />
-    <title>{frontmatter.title}</title>
+    <title>{pageTitle}</title>
+    {frontmatter.description && (
+      <meta name="description" content={`${frontmatter.description} — ${brandName}`} />
+    )}
+    <link rel="canonical" href={pageUrl} />
+    <meta property="og:title" content={pageTitle} />
+    {frontmatter.description && (
+      <meta property="og:description" content={`${frontmatter.description} — ${brandName}`} />
+    )}
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    {frontmatter.description && (
+      <meta name="twitter:description" content={`${frontmatter.description} — ${brandName}`} />
+    )}
+    <meta name="twitter:image" content={ogImage} />
+    {frontmatter.pubDate && (
+      <meta property="article:published_time" content={new Date(frontmatter.pubDate).toISOString()} />
+    )}
+    <script type="application/ld+json">
+      {JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: frontmatter.title,
+        description: frontmatter.description ?? undefined,
+        datePublished: frontmatter.pubDate
+          ? new Date(frontmatter.pubDate).toISOString()
+          : undefined,
+        author: frontmatter.author
+          ? { '@type': 'Person', name: frontmatter.author }
+          : { '@type': 'Person', name: brandName },
+        mainEntityOfPage: pageUrl,
+        image: ogImage,
+        url: pageUrl,
+      })}
+    </script>
   </head>
   <body>
     <div class="ieee-paper">

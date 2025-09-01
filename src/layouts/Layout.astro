@@ -15,6 +15,16 @@ const {
   lang = "en",
   showHeader = false,
 } = Astro.props as Props;
+
+const currentUrl = Astro.url;
+const canonicalUrl = currentUrl.href;
+const absoluteImage = image?.startsWith("http")
+  ? image
+  : new URL(image, Astro.site).href;
+const brandName = "Mohtasham Murshid Madani";
+const websiteName = "BlogsWithM";
+const pageTitle = title?.includes(brandName) ? title : `${title} | ${brandName}`;
+const siteUrl = Astro.site?.href ?? "https://blog.mohtasham.dev/";
 ---
 
 <!doctype html>
@@ -30,16 +40,31 @@ const {
       rel="stylesheet"
     />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={`${description} — ${brandName}`} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={`${description} — ${brandName}`} />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content={image} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={absoluteImage} />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={image} />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={`${description} — ${brandName}`} />
+    <script type="application/ld+json">
+      {JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: websiteName,
+        url: siteUrl,
+        publisher: {
+          '@type': 'Person',
+          name: brandName,
+        },
+        inLanguage: lang,
+      })}
+    </script>
+    <meta name="twitter:image" content={absoluteImage} />
     <slot name="head" />
   </head>
   <body class="min-h-screen flex flex-col">
@@ -47,7 +72,7 @@ const {
       showHeader && (
         <header class="max-w-3xl mx-auto px-6 py-6">
           <a href="/" class="text-xl font-semibold no-underline">
-            BlogsWithM
+            Mohtasham Murshid Madani
           </a>
         </header>
       )
@@ -58,7 +83,7 @@ const {
     <footer
       class="max-w-3xl mx-auto px-6 py-12 text-sm text-muted-foreground text-center"
     >
-      <p>© {new Date().getFullYear()} BlogsWithM</p>
+      <p>© {new Date().getFullYear()} Mohtasham Murshid Madani</p>
     </footer>
   </body>
 </html>
