@@ -28,62 +28,109 @@ const siteUrl = Astro.site?.href ?? "https://blog.mohtasham.dev/";
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} class="dark">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
+
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
     <meta name="description" content={`${description} — ${brandName}`} />
     <link rel="canonical" href={canonicalUrl} />
+
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={`${description} — ${brandName}`} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={absoluteImage} />
+
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={`${description} — ${brandName}`} />
-    <script type="application/ld+json">
-      {JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'WebSite',
-        name: websiteName,
-        url: siteUrl,
-        publisher: {
-          '@type': 'Person',
-          name: brandName,
-        },
-        inLanguage: lang,
-      })}
-    </script>
     <meta name="twitter:image" content={absoluteImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: websiteName,
+      url: siteUrl,
+      publisher: {
+        '@type': 'Person',
+        name: brandName,
+      },
+      inLanguage: lang,
+    })} />
+
     <slot name="head" />
+
+    <script is:inline>
+      (function() {
+        const theme = localStorage.getItem('theme');
+        if (theme === 'light') {
+          document.documentElement.classList.remove('dark');
+        } else if (theme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else if (!window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.documentElement.classList.remove('dark');
+        }
+      })();
+    </script>
   </head>
-  <body class="min-h-screen flex flex-col">
-    {
-      showHeader && (
-        <header class="max-w-3xl mx-auto px-6 py-6">
-          <a href="/" class="text-xl font-semibold no-underline">
-            Mohtasham Murshid Madani
+
+  <body class="min-h-screen flex flex-col antialiased">
+    {showHeader && (
+      <header class="sticky top-0 z-50 backdrop-blur-lg bg-[hsl(var(--bg)/0.85)] border-b border-[hsl(var(--border))]">
+        <div class="max-w-3xl mx-auto px-6 h-14 flex items-center justify-between">
+          <a href="/" class="text-sm font-semibold tracking-tight no-underline hover:opacity-70 transition-opacity" style="color: hsl(var(--fg))">
+            M.
           </a>
-        </header>
-      )
-    }
+          <button
+            id="theme-toggle"
+            aria-label="Toggle dark mode"
+            class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[hsl(var(--surface))] transition-colors"
+            style="background: none; border: none; color: hsl(var(--fg-muted)); padding: 0;"
+          >
+            <svg class="sun-icon hidden dark:block" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5" /><line x1="12" y1="1" x2="12" y2="3" /><line x1="12" y1="21" x2="12" y2="23" /><line x1="4.22" y1="4.22" x2="5.64" y2="5.64" /><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" /><line x1="1" y1="12" x2="3" y2="12" /><line x1="21" y1="12" x2="23" y2="12" /><line x1="4.22" y1="19.78" x2="5.64" y2="18.36" /><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+            </svg>
+            <svg class="moon-icon block dark:hidden" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          </button>
+        </div>
+      </header>
+    )}
+
     <main class="flex-1">
       <slot />
     </main>
-    <footer
-      class="max-w-3xl mx-auto px-6 py-12 text-sm text-muted-foreground text-center"
-    >
-      <p>© {new Date().getFullYear()} Mohtasham Murshid Madani</p>
+
+    <footer class="border-t border-[hsl(var(--border))]">
+      <div class="max-w-3xl mx-auto px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs" style="color: hsl(var(--fg-muted))">
+        <p>&copy; {new Date().getFullYear()} Mohtasham Murshid Madani</p>
+        <div class="flex items-center gap-4">
+          <a href="https://github.com/MohtashamMurshid" target="_blank" rel="noopener noreferrer" class="hover:opacity-100 transition-opacity opacity-60" style="color: hsl(var(--fg-muted))">GitHub</a>
+          <a href="https://x.com/mohtashamdotdev" target="_blank" rel="noopener noreferrer" class="hover:opacity-100 transition-opacity opacity-60" style="color: hsl(var(--fg-muted))">Twitter</a>
+          <a href="https://www.linkedin.com/in/mohtashammurshid" target="_blank" rel="noopener noreferrer" class="hover:opacity-100 transition-opacity opacity-60" style="color: hsl(var(--fg-muted))">LinkedIn</a>
+        </div>
+      </div>
     </footer>
+
+    <script is:inline>
+      document.getElementById('theme-toggle')?.addEventListener('click', function() {
+        const html = document.documentElement;
+        const isDark = html.classList.contains('dark');
+        html.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'light' : 'dark');
+      });
+    </script>
   </body>
 </html>
