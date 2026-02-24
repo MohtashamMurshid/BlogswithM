@@ -56,6 +56,20 @@ The package supports a broad set of Markdown and document features:
 npm install @mohtasham/md-to-docx
 ```
 
+## Install as a Skill 
+
+If you want to use it as an agent skill inside your workflow, install it with the `skills` CLI:
+
+```bash
+# Install from GitHub
+npx skills add MohtashamMurshid/md-to-docx 
+
+You can list discoverable skills first:
+
+```bash
+npx skills add MohtashamMurshid/md-to-docx --list --full-depth
+```
+
 ## Quick start (TypeScript / JavaScript)
 
 ```ts
