@@ -6,7 +6,7 @@ author: Mohtasham Murshid Madani
 description: "AI is the broader field that encompasses the creation of machines or systems that can perform tasks typically requiring human intelligence. These tasks include recognizing speech, making decisions, understanding images, and even playing chess."
 
 pubDate: "2022-07-08"
-tags: ["astro", "blogging", "learning in public", "successes"]
+tags: ["artificial intelligence", "machine learning", "deep learning", "neural networks", "ai fundamentals"]
 department: Department of computer science
 university: taylors university
 email: contact@mohtasham.dev

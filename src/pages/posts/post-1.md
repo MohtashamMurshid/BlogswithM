@@ -8,7 +8,7 @@ image:
   url: "https://docs.astro.build/assets/arc.webp"
   alt: "The Astro logo on a dark background with a purple gradient arc."
 pubDate: "2024-07-08"
-tags: ["astro", "blogging", "learning in public", "successes"]
+tags: ["brain-computer interfaces", "neuroscience", "neural engineering", "assistive technology", "machine learning"]
 department: Department of Computer Science and Engineering
 university: Islamic University of Science and Technology, Awantipora, Pulwama, J&K
 ---

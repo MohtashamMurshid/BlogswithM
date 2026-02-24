@@ -1,9 +1,9 @@
 ---
 import "../styles/global.css";
+import { getImagePath } from "astro-opengraph-images";
 export interface Props {
   title?: string;
   description?: string;
-  image?: string;
   lang?: string;
   showHeader?: boolean;
 }
@@ -11,20 +11,18 @@ export interface Props {
 const {
   title = "BlogsWithM",
   description = "Articles, notes, and thoughts.",
-  image = "/favicon.svg",
   lang = "en",
   showHeader = false,
 } = Astro.props as Props;
 
 const currentUrl = Astro.url;
 const canonicalUrl = currentUrl.href;
-const absoluteImage = image?.startsWith("http")
-  ? image
-  : new URL(image, Astro.site).href;
 const brandName = "Mohtasham Murshid Madani";
 const websiteName = "BlogsWithM";
 const pageTitle = title?.includes(brandName) ? title : `${title} | ${brandName}`;
 const siteUrl = Astro.site?.href ?? "https://blog.mohtasham.dev/";
+const absoluteImage = new URL(getImagePath({ url: Astro.url, site: Astro.site }), siteUrl).href;
+const rssUrl = new URL("/rss.xml", siteUrl).href;
 ---
 
 <!doctype html>
@@ -45,14 +43,18 @@ const siteUrl = Astro.site?.href ?? "https://blog.mohtasham.dev/";
     <title>{pageTitle}</title>
     <meta name="description" content={`${description} — ${brandName}`} />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" type="application/rss+xml" title={`${websiteName} RSS Feed`} href={rssUrl} />
 
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={`${description} — ${brandName}`} />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={websiteName} />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={absoluteImage} />
 
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@mohtashamdotdev" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={`${description} — ${brandName}`} />
     <meta name="twitter:image" content={absoluteImage} />
@@ -62,6 +64,7 @@ const siteUrl = Astro.site?.href ?? "https://blog.mohtasham.dev/";
       '@type': 'WebSite',
       name: websiteName,
       url: siteUrl,
+      description: `${description} — ${brandName}`,
       publisher: {
         '@type': 'Person',
         name: brandName,
