@@ -9,7 +9,7 @@ pubDate: "2022-07-08"
 tags: ["artificial intelligence", "machine learning", "deep learning", "neural networks", "ai fundamentals"]
 department: Department of computer science
 university: taylors university
-email: contact@mohtasham.dev
+email: mohtashammurshid@gmail.com
 ---
 
 # **1. What is Artificial Intelligence (AI)?**

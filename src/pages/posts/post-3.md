@@ -9,7 +9,7 @@ pubDate: "2025-08-14"
 tags: ["nodejs", "deep dive", "performance", "backend", "javascript"]
 department: School of Computer Science
 university: Taylor’s University Lakeside Campus
-email: contact@mohtasham.dev
+email: mohtashammurshid@gmail.com
 ---
 
 # Node.js Deep Dive: From Fundamentals to Pro-Level Techniques

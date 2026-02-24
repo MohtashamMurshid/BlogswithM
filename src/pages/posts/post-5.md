@@ -17,7 +17,7 @@ tags:
   ]
 department: School of Computer Science
 university: Taylor’s University Lakeside Campus
-email: contact@mohtasham.dev
+email: mohtashammurshid@gmail.com
 ---
 
 # Big Data Technologies for Precision Agriculture: Implementation and Evaluation of a Dual-Award Assignment Platform

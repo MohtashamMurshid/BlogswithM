@@ -16,7 +16,7 @@ tags:
   ]
 department: School of Computer Science
 university: Taylor’s University Lakeside Campus
-email: contact@mohtasham.dev
+email: mohtashammurshid@gmail.com
 ---
 
 # Design Principles for Cognitive Systems: Architecture, Components, and Learning Modalities

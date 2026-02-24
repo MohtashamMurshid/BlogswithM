@@ -4,7 +4,8 @@ import { readFileSync } from "node:fs";
 
 import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
-import opengraphImages, { presets } from "astro-opengraph-images";
+import opengraphImages from "astro-opengraph-images";
+import { editorialOg } from "./src/lib/og-renderer.mjs";
 
 // https://astro.build/config
 export default defineConfig({
@@ -23,7 +24,7 @@ export default defineConfig({
           },
         ],
       },
-      render: presets.simpleBlog,
+      render: /** @type {import("astro-opengraph-images").RenderFunction} */ (editorialOg),
     }),
   ],
 });

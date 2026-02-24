@@ -20,6 +20,11 @@ const canonicalUrl = currentUrl.href;
 const brandName = "Mohtasham Murshid Madani";
 const websiteName = "BlogsWithM";
 const pageTitle = title?.includes(brandName) ? title : `${title} | ${brandName}`;
+const truncateForOg = (value: string, maxLength: number) =>
+  value.length > maxLength ? `${value.slice(0, maxLength - 1).trimEnd()}...` : value;
+const ogTitle = truncateForOg(title ?? websiteName, 80);
+const metaDescription = `${description} — ${brandName}`;
+const ogDescription = truncateForOg(metaDescription, 140);
 const siteUrl = Astro.site?.href ?? "https://blog.mohtasham.dev/";
 const absoluteImage = new URL(getImagePath({ url: Astro.url, site: Astro.site }), siteUrl).href;
 const rssUrl = new URL("/rss.xml", siteUrl).href;
@@ -41,12 +46,12 @@ const rssUrl = new URL("/rss.xml", siteUrl).href;
 
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
-    <meta name="description" content={`${description} — ${brandName}`} />
+    <meta name="description" content={metaDescription} />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="alternate" type="application/rss+xml" title={`${websiteName} RSS Feed`} href={rssUrl} />
 
-    <meta property="og:title" content={pageTitle} />
-    <meta property="og:description" content={`${description} — ${brandName}`} />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={websiteName} />
     <meta property="og:locale" content="en_US" />
@@ -55,8 +60,8 @@ const rssUrl = new URL("/rss.xml", siteUrl).href;
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@mohtashamdotdev" />
-    <meta name="twitter:title" content={pageTitle} />
-    <meta name="twitter:description" content={`${description} — ${brandName}`} />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={ogDescription} />
     <meta name="twitter:image" content={absoluteImage} />
 
     <script type="application/ld+json" set:html={JSON.stringify({
