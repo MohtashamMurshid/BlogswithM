@@ -35,8 +35,6 @@ const formattedDate = frontmatter.pubDate
       day: "numeric",
     })
   : null;
-
-let readingTime = 5;
 ---
 
 <!doctype html>
@@ -49,7 +47,7 @@ let readingTime = 5;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400&display=swap"
       rel="stylesheet"
     />
 
@@ -109,61 +107,44 @@ let readingTime = 5;
   </head>
 
   <body class="antialiased" style="background-color: hsl(var(--bg)); color: hsl(var(--fg));">
-    <!-- Navigation -->
-    <header class="sticky top-0 z-50 backdrop-blur-lg border-b" style="background: hsl(var(--bg) / 0.85); border-color: hsl(var(--border));">
-      <div class="max-w-3xl mx-auto px-6 h-14 flex items-center justify-between">
-        <a href="/" class="inline-flex items-center gap-2 text-sm no-underline transition-opacity hover:opacity-70" style="color: hsl(var(--fg-muted));">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    <header class="fixed top-0 left-0 right-0 z-50" style="background: hsl(var(--bg));">
+      <div class="max-w-2xl mx-auto px-5 h-12 flex items-center justify-between">
+        <a
+          href="/"
+          class="text-xs no-underline transition-opacity hover:opacity-50 flex items-center gap-1.5"
+          style="color: hsl(var(--fg-muted));"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
           Back
         </a>
         <button
           id="theme-toggle"
           aria-label="Toggle dark mode"
-          class="w-8 h-8 flex items-center justify-center rounded-full transition-colors"
+          class="w-7 h-7 flex items-center justify-center rounded-full transition-opacity hover:opacity-50"
           style="background: none; border: none; color: hsl(var(--fg-muted)); padding: 0;"
         >
-          <svg class="sun-icon hidden dark:block" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg class="sun-icon hidden dark:block" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="5" /><line x1="12" y1="1" x2="12" y2="3" /><line x1="12" y1="21" x2="12" y2="23" /><line x1="4.22" y1="4.22" x2="5.64" y2="5.64" /><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" /><line x1="1" y1="12" x2="3" y2="12" /><line x1="21" y1="12" x2="23" y2="12" /><line x1="4.22" y1="19.78" x2="5.64" y2="18.36" /><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
           </svg>
-          <svg class="moon-icon block dark:hidden" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg class="moon-icon block dark:hidden" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
           </svg>
         </button>
       </div>
     </header>
 
-    <main class="max-w-3xl mx-auto px-6 py-12 sm:py-16 animate-fade-up">
-      <!-- Article Header -->
+    <main class="max-w-2xl mx-auto px-5 pt-24 pb-16">
       <header class="mb-10">
-        {frontmatter.tags && frontmatter.tags.length > 0 && (
-          <div class="flex items-center gap-2 mb-4 flex-wrap">
-            {frontmatter.tags.slice(0, 4).map((tag: string) => (
-              <span
-                class="text-xs font-medium px-2.5 py-1 rounded-full"
-                style="color: hsl(var(--accent)); background: hsl(var(--accent) / 0.1); border: 1px solid hsl(var(--accent) / 0.15);"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        )}
-
-        <h1 class="text-3xl sm:text-4xl font-bold tracking-tight leading-tight" style="color: hsl(var(--fg)); font-family: Inter, system-ui, sans-serif; text-wrap: balance;">
+        <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight leading-tight text-balance" style="color: hsl(var(--fg)); font-family: Inter, system-ui, sans-serif;">
           {frontmatter.title}
         </h1>
 
-        <div class="mt-5 flex items-center gap-3 flex-wrap text-sm" style="color: hsl(var(--fg-muted));">
+        <div class="mt-4 flex items-center gap-2 text-xs" style="color: hsl(var(--fg-muted));">
           {frontmatter.author && (
-            <div class="flex items-center gap-2">
-              <div class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold"
-                style="background: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--accent-muted))); color: white;">
-                {frontmatter.author.charAt(0)}
-              </div>
-              <span class="font-medium" style="color: hsl(var(--fg));">{frontmatter.author}</span>
-            </div>
+            <span>{frontmatter.author}</span>
           )}
           {frontmatter.author && formattedDate && (
-            <span style="color: hsl(var(--border))">·</span>
+            <span>&middot;</span>
           )}
           {formattedDate && (
             <time datetime={new Date(frontmatter.pubDate!).toISOString()}>
@@ -172,38 +153,39 @@ let readingTime = 5;
           )}
         </div>
 
-        {frontmatter.description && (
-          <p class="mt-5 text-lg leading-relaxed" style="color: hsl(var(--fg-muted)); font-family: 'Source Serif 4', Georgia, serif;">
-            {frontmatter.description}
-          </p>
+        {frontmatter.tags && frontmatter.tags.length > 0 && (
+          <div class="mt-4 flex items-center gap-2 flex-wrap">
+            {frontmatter.tags.slice(0, 4).map((tag: string) => (
+              <span
+                class="text-xs px-2 py-0.5 rounded"
+                style="color: hsl(var(--fg-muted)); background: hsl(var(--surface));"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
         )}
       </header>
 
-      <div class="w-full h-px mb-10" style="background: hsl(var(--border))"></div>
+      <div class="w-full h-px mb-8" style="background: hsl(var(--border));"></div>
 
       {headings.length > 0 && <TableOfContents headings={headings} />}
 
-      <!-- Article Content -->
       <article class="prose">
         <slot />
       </article>
 
-      <!-- Article Footer -->
-      <footer class="mt-16 pt-8 border-t" style="border-color: hsl(var(--border));">
-        <div class="flex items-center justify-between">
-          <a
-            href="/"
-            class="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg transition-colors no-underline"
-            style="color: hsl(var(--fg-muted)); background: hsl(var(--surface)); border: 1px solid hsl(var(--border));"
-            onmouseenter="this.style.borderColor='hsl(var(--accent))'; this.style.color='hsl(var(--accent))'"
-            onmouseleave="this.style.borderColor='hsl(var(--border))'; this.style.color='hsl(var(--fg-muted))'"
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-            All articles
-          </a>
-        </div>
+      <footer class="mt-16 pt-8" style="border-top: 1px solid hsl(var(--border));">
+        <a
+          href="/"
+          class="inline-flex items-center gap-1.5 text-xs no-underline transition-opacity hover:opacity-50"
+          style="color: hsl(var(--fg-muted));"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          All articles
+        </a>
 
-        <div class="mt-10 py-6 text-center text-xs" style="color: hsl(var(--fg-muted))">
+        <div class="mt-10 text-center text-xs" style="color: hsl(var(--fg-muted));">
           <p>&copy; {new Date().getFullYear()} Mohtasham Murshid Madani</p>
         </div>
       </footer>
@@ -217,16 +199,5 @@ let readingTime = 5;
         localStorage.setItem('theme', isDark ? 'light' : 'dark');
       });
     </script>
-
-    <style>
-      .animate-fade-up {
-        animation: fadeUp 0.6s ease-out;
-      }
-
-      @keyframes fadeUp {
-        0% { opacity: 0; transform: translateY(16px); }
-        100% { opacity: 1; transform: translateY(0); }
-      }
-    </style>
   </body>
 </html>
