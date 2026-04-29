@@ -1,6 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-serif: "Source Serif 4", Georgia, Cambria, serif;
+  --font-mono: "JetBrains Mono", "Fira Code", Consolas, monospace;
+}
 
 @layer base {
   :root {

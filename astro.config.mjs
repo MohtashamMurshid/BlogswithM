@@ -2,7 +2,7 @@
 import { defineConfig } from "astro/config";
 import { readFileSync } from "node:fs";
 
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 import opengraphImages from "astro-opengraph-images";
 import { editorialOg } from "./src/lib/og-renderer.mjs";
@@ -10,8 +10,10 @@ import { editorialOg } from "./src/lib/og-renderer.mjs";
 // https://astro.build/config
 export default defineConfig({
   site: "https://blog.mohtasham.dev",
+  vite: {
+    plugins: [tailwindcss()],
+  },
   integrations: [
-    tailwind(),
     sitemap(),
     opengraphImages({
       options: {
